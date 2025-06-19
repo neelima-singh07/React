@@ -1,33 +1,30 @@
 
+import { useState } from "react";
 
+const StudentCard =(props)=>{
+    console.log(props.student)
+    const [likes, setLikes] = useState(0);
 
+    const stdCardStyle = {
+        border: "2px solid gray",
+        padding: "15px",
+        margin: "10px",
+        borderRadius: "10px",
+        backgroundColor: "#eee",
+        boxShadow: "0 4px 4px gray"
+    }
 
-function StudentCard(props) {
-    {/*add css to card*/}
-    const cardStyle = {
-      border: '1px solid #ccc',
-      padding: '10px',
-      borderRadius: '5px',
-      backgroundColor: '#ee',
-      margin: '10px 0',
-      boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-      width: '200px',
-      textAlign: 'center',
-      fontFamily: 'Arial, sans-serif',
-      color: '#333',
-    };
     return (
-      <div style={cardStyle}>
-        
-        <p>Student Name: {props.student}</p>
-        <p>Age: {props.age}</p>
-        
-      </div>
-    )
-
-    
-
+        <div style={stdCardStyle}>
+            <h1>Student: {props.student.sname}</h1>
+            <p>Age: <b>{props.student.age}</b></p>
+            <p>Address: <b>{props.student.city}</b></p>
+            <button onClick={()=>{
+                setLikes(likes+1)
+            }}>Like #{likes}</button>
+        </div>
+    );
 }
 export default StudentCard;
-  
-  
+
+
