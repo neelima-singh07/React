@@ -1,4 +1,4 @@
-import { useState ,useCallback} from 'react'
+import { useState ,useCallback,useRef,useEffect} from 'react'
 
 import './index.css'
 
@@ -7,7 +7,12 @@ function App() {
   const [numberAllowed,setNumberAllowed] = useState(false);
   const [symbolAllowed,setSymbolAllowed] = useState(false);
   const [Password,setPassword] = useState('');
-
+  //ref hook
+  const passwordRef = useRef(null);
+  const copyPasswordToClipBoard = useCallback(()=>{
+    window.navigator.clipboard.writeText(Password);
+    alert("Password copied to clipboard");
+  },[Password]);
   const passwordGenrator= useCallback(()=>{
 
     let pass="";
@@ -22,18 +27,22 @@ function App() {
     }
     setPassword(pass)
   },[length,numberAllowed,symbolAllowed,setPassword]);
-  
+  useEffect(()=>{
+    passwordGenrator();
+  },[length,numberAllowed,symbolAllowed,passwordGenrator]);
   return (
     <>
       <h1 className='text-4xl text-center'>Password Genrator</h1><br/>
       <div className='flex justify-center  shadow rounded-lg  mb-4' >
-        {/*style for the input box  which is on centre of page*/}
+        
 
 
-        <input style={{width:'500px'}} className='border-2 border-gray-300 rounded-lg m-2 p-2 ' type='text'  onChange={(e)=>setLength(e.target.value)} value={Password}/>
+        <input style={{width:'500px'}} className='border-2 border-gray-300 rounded-lg m-2 p-2 ' type='text'  onChange={(e)=>setLength(e.target.value)} value={Password} ref={passwordRef}
+          onClick={copyPasswordToClipBoard}
+        />
         
         
-        <button className='bg-blue-500 text-white rounded-lg m-5 p-3' >Copy</button><br/>
+        <button className='bg-blue-500 text-white rounded-lg m-5 p-3 hover:bg-blue-700' >Copy</button><br/>
         
 
 
@@ -62,7 +71,7 @@ function App() {
       </div>
       {/*button to generate password*/}
       <div className='flex justify-center mt-4'>
-        <button className='bg-blue-500 text-white rounded-lg p-3' onClick={passwordGenrator}>Generate Password</button>
+        <button className='bg-blue-500 text-white rounded-lg p-3 hover:bg-blue-700' onClick={passwordGenrator}>Generate Password</button>
       </div>
 
     </>
