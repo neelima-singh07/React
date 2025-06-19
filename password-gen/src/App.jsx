@@ -6,13 +6,13 @@ function App() {
   const [length, setLength] = useState(8);
   const [numberAllowed,setNumberAllowed] = useState(false);
   const [symbolAllowed,setSymbolAllowed] = useState(false);
-  const [Password,setPassword] = useState('');
+  const [password,setPassword] = useState('');
   //ref hook
   const passwordRef = useRef(null);
   const copyPasswordToClipBoard = useCallback(()=>{
-    window.navigator.clipboard.writeText(Password);
+    window.navigator.clipboard.writeText(password);
     alert("Password copied to clipboard");
-  },[Password]);
+  },[password]);
   const passwordGenrator= useCallback(()=>{
 
     let pass="";
@@ -21,7 +21,7 @@ function App() {
     if(symbolAllowed) str += "!@#$%^&*()_+[]{}|;:,.<>?~";
 
     for(let i=0;i<length;i++){
-      let char=Math.floor(Math.random()*str.length)+1;
+      let char=Math.floor(Math.random()*str.length);
       pass+=str.charAt(char);
 
     }
@@ -37,12 +37,12 @@ function App() {
         
 
 
-        <input style={{width:'500px'}} className='border-2 border-gray-300 rounded-lg m-2 p-2 ' type='text'  onChange={(e)=>setLength(e.target.value)} value={Password} ref={passwordRef}
-          onClick={copyPasswordToClipBoard}
+        <input style={{width:'500px'}} className='border-2 border-gray-300 rounded-lg m-2 p-2 ' type='text'   value={password}  readOnly
+          
         />
         
         
-        <button className='bg-blue-500 text-white rounded-lg m-5 p-3 hover:bg-blue-700' >Copy</button><br/>
+        <button className='bg-blue-500 text-white rounded-lg m-5 p-3 hover:bg-blue-700' ref={passwordRef} onClick={copyPasswordToClipBoard}>Copy</button><br/>
         
 
 
