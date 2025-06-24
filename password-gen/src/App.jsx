@@ -32,12 +32,12 @@ function App() {
   },[length,numberAllowed,symbolAllowed,passwordGenrator]);
   return (
     <>
-      <h1 className='text-4xl text-center'>Password Genrator</h1><br/>
+      <h1 className='text-4xl text-center'>Password Genrator </h1><br/>
       <div className='flex justify-center  shadow rounded-lg  mb-4' >
         
 
 
-        <input style={{width:'500px'}} className='border-2 border-gray-300 rounded-lg m-2 p-2 ' type='text'   value={password}  readOnly
+        <input style={{width:'500px', backgroundColor:'skyblue'}} className='border-2 border-gray-300 rounded-lg m-2 p-2 ' type='text'   value={password}  readOnly
           
         />
         
@@ -52,7 +52,7 @@ function App() {
       </div><br/>
       <div className='flex justify-center text-sm gap-x-2'>
            <div className='flex items-center gap-x-1'>
-            <input  type='range'min={8} max={100} value={length} className='cursor-pointer' onChange={(e)=>{setLength(e.target.value)}} />
+            <input style={{color:'pink'}} type='range'min={8} max={100} value={length} className='cursor-pointer' onChange={(e)=>{setLength(e.target.value)}} />
             <label>Length:{length}</label>
 
       </div>
